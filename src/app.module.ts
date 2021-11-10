@@ -6,9 +6,11 @@ import { AppService } from './app.service';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { LoggingInterceptor } from './interceptors/log/logging.interceptor';
 import { PrismaModule } from './modules/prisma/prisma.module';
+import { UserService } from './services/user/user.service';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), PrismaModule],
+  imports: [ConfigModule.forRoot(), PrismaModule, UserModule],
   controllers: [AppController],
   providers: [AppService, {
     provide: APP_INTERCEPTOR,
