@@ -1,7 +1,7 @@
 import { Controller, Get, HttpException, HttpStatus, UseInterceptors } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { AppService } from './app.service';
-import { SentryInterceptor } from './interceptors/sentry.interceptor';
+import { SentryInterceptor } from './interceptors/sentry/sentry.interceptor';
 
 
 @ApiTags('App')
