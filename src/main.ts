@@ -4,7 +4,7 @@ import { Logger } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import * as os from 'os';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-
+import * as Sentry from '@sentry/node'
 const port = process.env.PORT || 3000;
 
 async function bootstrap() {
@@ -17,6 +17,13 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config, {});
   SwaggerModule.setup('api/doc', app, document);
+
+
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+    enabled: process.env.ENVIRONMENT === 'development' ? false : true,
+    attachStacktrace: true, environment: process.env.ENVIRONMENT
+  });
 
   await app.listen(port);
   Logger.log(`Server running on ${os.hostname}:${port}`, 'Bootstrap');

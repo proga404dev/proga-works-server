@@ -1,8 +1,11 @@
-import { Controller, Get, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, HttpException, HttpStatus, UseInterceptors } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { AppService } from './app.service';
+import { SentryInterceptor } from './interceptors/sentry.interceptor';
+
 
 @ApiTags('App')
+@UseInterceptors(new SentryInterceptor())
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) { }
